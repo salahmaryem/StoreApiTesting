@@ -20,3 +20,12 @@ Feature: Creating and Updating a product with a specific header key
         When method PUT
         Then status 201
         And match response.message == 'Success! product updated'
+
+      Scenario: Create a post method but change the payload of the file request
+      Given path '/products'
+      And request requestBody
+      And set requestBody.description = 'This is a new description'
+      When method POST
+      Then status 201
+      And print response
+      And response.data.description == requestBody.description

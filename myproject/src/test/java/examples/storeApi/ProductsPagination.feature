@@ -12,12 +12,9 @@ Feature: Products pagination
     And param page = 1
     When method GET
     Then status 200
-    * def response = response
-    * def metadata = response.metadata
-    * def currentPage = metadata.currentPage
-    * def totalProducts = metadata.totalProducts
+    * def currentPage = response.metadata.currentPage
     * print 'Current Page:', currentPage
-    * print 'Total Products:', totalProducts
+    And match response.metadata.nextPage == currentPage + 1
 
    # Scenario: Fetch the next page
       Given path '/products'
